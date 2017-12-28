@@ -15,15 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from trutyi.views import TermListView
+from trutyi.views import TermListView, auth_redirect
 from rest_framework import routers
 
-# urlpatterns = [
-#     url(r'^admin/', admin.site.urls),
-#     url(r'^terms/', TermListView.as_view()),
-# ]
-
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^auth-redirect/', auth_redirect),
+]
 
 router = routers.DefaultRouter()
 router.register(r'terms', TermListView, base_name='terms')
-urlpatterns = router.urls
+urlpatterns += router.urls

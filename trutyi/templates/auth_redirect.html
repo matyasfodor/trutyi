@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      var payload = JSON.parse('{{ payload | escapejs }}');
+      // TODO this could be more secure!!
+      window.opener.postMessage(payload, '*');
+    </script>
+  </head>
+  <body>
+    This is what you should see.
+  </body>
+</html>

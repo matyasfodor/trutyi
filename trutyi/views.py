@@ -1,4 +1,5 @@
 from django.http import HttpResponse, HttpResponseBadRequest
+from django.shortcuts import render
 
 # from django.views.generic import ListView
 import json
@@ -27,3 +28,15 @@ class TermListView(viewsets.ViewSet):
         except Exception as ex:
             return HttpResponseBadRequest(str(ex))
         return HttpResponse()
+
+def auth_redirect(request):
+    if 'state' not in request.GET or 'code' not in request.GET:
+        HttpResponseBadRequest("Something went wrong. 'state' and 'code' should be included")
+    return render(
+        request,
+        'auth_redirect.html',
+        {'payload': json.dumps({
+            'state': request.GET['state'],
+            'code': request.GET['code'],
+        })}
+    )
