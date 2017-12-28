@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from trutyi.views import TermListView, auth_redirect
+from trutyi.views import TermListView, auth_redirect, auth
 from rest_framework import routers
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^auth/', auth),
     url(r'^auth-redirect/', auth_redirect),
 ]
 
