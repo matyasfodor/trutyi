@@ -39,6 +39,7 @@ def auth(request):
         'response_type': 'code',
         'client_id': os.environ['QUIZLET_CLIENT_ID'],
         'scope': 'read write_set write_group',
+        # Not csrf safe
         'state': 'the',
         'redirect_uri': REDIRECT_URI,
     }
