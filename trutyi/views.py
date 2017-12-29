@@ -14,7 +14,7 @@ class TermListView(viewsets.ViewSet):
     serializer_class = TermSerializer
 
     def create(self, request):
-        request_data = json.loads(request.body.decode('ascii'))
+        request_data = json.loads(request.body.decode())
         serializer = TermSerializer(data=request_data)
         serializer.is_valid(raise_exception=True)
         token = os.environ['QUIZLET_HARDCODED_TOKEN']
