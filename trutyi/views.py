@@ -15,12 +15,12 @@ class TermListView(viewsets.ViewSet):
 
     def create(self, request):
         request_data = json.loads(request.body.decode())
+        access_token = request_data.pop('access_token')
         serializer = TermSerializer(data=request_data)
         serializer.is_valid(raise_exception=True)
-        token = os.environ['QUIZLET_HARDCODED_TOKEN']
         set_id = os.environ['QUIZLET_HARDCODED_SET_ID']
         headers = {
-            "Authorization": f"Bearer {token}",
+            "Authorization": f"Bearer {access_token}",
             "Content-Type": "application/x-www-form-urlencoded"
         }
         url = f'https://api.quizlet.com/2.0/sets/{set_id}/terms'
