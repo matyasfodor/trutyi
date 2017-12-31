@@ -23,8 +23,9 @@ function string2HTML(string) {
 
 var parent = document.getElementById('gt-res-tools-l');
 
-element = string2HTML(`<button style="font-weight: 600">TRUTYI</button>`);
+const element = string2HTML(`<button style="font-weight: 600">TRUTYI</button>`);
 element.addEventListener('click', function(e) {
+  element.disabled = true;
   e.preventDefault();
   var payload = {
     term: document.getElementById('source').value,
@@ -36,6 +37,7 @@ element.addEventListener('click', function(e) {
     payload: payload,
   }, function(response){
     console.log(response);
+    element.disabled = false;
     //If you need a response, do stuff with it here
   });
 });
