@@ -3,6 +3,11 @@
 // var settings = new Store("settings", {
 //     "sample_setting": "This is how you use Store.js to remember values"
 // });
+const STATE = {
+  accessToken: null,
+  userId: null,
+  selectedSet: null,
+};
 
 const backend = 'https://enigmatic-savannah-14867.herokuapp.com';
 //example of using a message handler from the inject scripts
@@ -13,7 +18,7 @@ chrome.extension.onMessage.addListener(
       sendResponse();
     } else if (request.from == 'content' && request.action == 'add_term') {
       var payload = request.payload;
-      payload.access_token = localStorage.getItem('quizlet_access_token');
+      payload.access_token = STATE.accessToken;
       fetch('https://enigmatic-savannah-14867.herokuapp.com/terms/', {
         method: 'POST',
         body: JSON.stringify(payload),
@@ -28,8 +33,11 @@ document.getElementById('quizlet-login').onclick = () => {
   quizletWindow = window.open(url, 'Quizlet auth', "height=600,width=1100");
 };
 
-window.addEventListener("message", function(message) {
+window.addEventListener("message", (message) => {
   let {access_token} = message.data;
   quizletWindow.close();
   localStorage.setItem('quizlet_access_token', access_token);
+  localStorage.setItem('quizlet_user_id', message.data.user_id);
+  STATE.accessToken = message.data.access_token;
+  STATE.userId = message.data.user_id;
 }, false);

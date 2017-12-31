@@ -11,14 +11,12 @@ from trutyi.serializers import TermSerializer
 import base64
 
 class TermListView(viewsets.ViewSet):
-    serializer_class = TermSerializer
-
     def create(self, request):
         request_data = json.loads(request.body.decode())
         access_token = request_data.pop('access_token')
         serializer = TermSerializer(data=request_data)
         serializer.is_valid(raise_exception=True)
-        set_id = os.environ['QUIZLET_HARDCODED_SET_ID']
+        set_id = request_data['set_id']
         headers = {
             "Authorization": f"Bearer {access_token}",
             "Content-Type": "application/x-www-form-urlencoded"
@@ -30,6 +28,19 @@ class TermListView(viewsets.ViewSet):
         except Exception as ex:
             return HttpResponseBadRequest(str(ex))
         return HttpResponse()
+
+class SetListView(viewsets.ViewSet):
+    def get(self, request):
+        headers = {
+            "Authorization": request.META['HTTP_AUTHORIZATION'],
+        }
+        user_id = request.GET['user_id']
+        response = requests.get(f'https://api.quizlet.com/2.0/users/{user_id}/sets', headers=headers)
+        response.raise_for_status()
+        return HttpResponse(response.text)
+
+    def create(self, request):
+        pass
 
 # Perhaps this could be realtive to base?
 REDIRECT_URI = 'https://enigmatic-savannah-14867.herokuapp.com/auth-redirect/'
