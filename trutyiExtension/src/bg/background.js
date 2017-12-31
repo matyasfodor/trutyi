@@ -36,8 +36,9 @@ chrome.extension.onMessage.addListener(
       fetch(backend + '/terms/', {
         method: 'POST',
         body: JSON.stringify(payload),
-      }).then(() => {sendResponse('OK');}, () => {sendResponse('NOK');})
+      }).then(() => {sendResponse({success: true});}, () => {sendResponse({success: false});})
     }
+    return true;
   });
 
 // TODO IIFE, strict mode;

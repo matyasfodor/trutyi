@@ -23,7 +23,8 @@ function string2HTML(string) {
 
 var parent = document.getElementById('gt-res-tools-l');
 
-const element = string2HTML(`<button style="font-weight: 600">TRUTYI</button>`);
+const url = chrome.extension.getURL('icons/icon48.png');
+const element = string2HTML(`<div id="trutyi-button" class="goog-toolbar-button" style="float: left;" data-tooltip-align="t,c" data-tooltip="Trutyi"><a title="Trutyi"><img src="${url}" style="max-width: 26px;"></img></a></div>`);
 element.addEventListener('click', function(e) {
   element.disabled = true;
   e.preventDefault();
@@ -36,9 +37,13 @@ element.addEventListener('click', function(e) {
     action: 'add_term',
     payload: payload,
   }, function(response){
-    console.log(response);
+    if (response.success) {
+      console.log('ok');
+    } else {
+      console.log('nok');
+    }
     element.disabled = false;
-    //If you need a response, do stuff with it here
   });
 });
+
 parent.appendChild(element);

@@ -1,9 +1,9 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
-  "version": "0.0.1",
+  "name": "Trutyi",
+  "version": "1.0.0",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "With this extensnion you can add words to quizlet sets with a single click",
+  "homepage_url": "https://github.com/matyasfodor/trutyi",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -16,7 +16,7 @@
   },
   "page_action": {
     "default_icon": "icons/icon19.png",
-    "default_title": "page action demo",
+    "default_title": "Trutyi",
     "default_popup": "src/page_action/page_action.html"
   },
   "permissions": [
@@ -29,7 +29,11 @@
       ],
       "js": [
         "src/inject/inject.js"
-      ]
+      ],
+      "css": ["src/inject/inject.css"]
     }
+  ],
+  "web_accessible_resources": [
+    "icons/icon48.png"
   ]
 }
