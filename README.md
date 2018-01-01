@@ -1,53 +1,29 @@
-# Heroku Django Starter Template
+# Trutyi
 
-An utterly fantastic project starter template for Django 1.11.
+A browser extension and a backend service for instantly adding words from google translate to your quizlet sets.
 
 ## Features
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise.
-- Latest Python 3.6 runtime environment. 
+- Browser extension:
+  * Log into Quizlet with the extension background page
+  * List sets created by a user
+  * Select the set (which will be used by the project)
+  * Add new entries in google translate with a single click.
+  
+- Backend service:
+  * Hosted on Heroku
+  * Basically a proxy, because Quizlet checks the origin of the request.
+  * Does not store any user information
 
 ## How to Use
 
-To use this project, follow these steps:
+The extension is not published yet. The easiest way to try it is to
+- Clone the project
+- Go to chrome://extensions/ and click "Load unpacked extension"
+- Select trutyiExtension in your file browser
 
-1. Create your working environment.
-2. Install Django (`$ pip install django`)
-3. Create a new project using this template
+## Note
 
-## Creating Your Project
+This project is in a very early stage, use it on your own risk. Issues / contribution doc will be added.
 
-Using this template to create a new Django app is easy::
-
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
-
-(If this doesn't work on windows, replace `django-admin.py` with `django-admin`)
-
-You can replace ``helloworld`` with your desired project name.
-
-## Deployment to Heroku
-
-    $ git init
-    $ git add -A
-    $ git commit -m "Initial commit"
-
-    $ heroku create
-    $ git push heroku master
-
-    $ heroku run python manage.py migrate
-
-See also, a [ready-made application](https://github.com/heroku/python-getting-started), ready to deploy.
-
-## Using Python 2.7?
-
-Just update `runtime.txt` to `python-2.7.13` (no trailing spaces or newlines!).
-
-
-## License: MIT
-
-## Further Reading
-
-- [Gunicorn](https://warehouse.python.org/project/gunicorn/)
-- [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
-- [dj-database-url](https://warehouse.python.org/project/dj-database-url/)
+## License: GLP-3.0
